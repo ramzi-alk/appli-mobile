@@ -31,7 +31,10 @@
                  
                 echo" </tr> </thead>";
                 // Dans la boucle foreach des modèles nous récupérons les informations que nous voulons afficher dans une seconde boucle
-                 $lesQuantites = $bdd->query("select id_modele as 'idMod', id_ecran as 'idVit', nombreStock, couleurEcran as 'couleur',modele_ecran.prix_achat as 'prix' FROM modele_ecran join ecran on id_ecran = ecran.id where id_modele = $modele->id order by id_ecran ");
+                 $lesQuantites = $bdd->query("select id_modele as 'idMod', id_ecran as 'idVit', nombreStock, couleurEcran as 'couleur',
+                 modele_ecran.prix_achat as 'prix' FROM modele_ecran 
+                 join ecran on id_ecran = ecran.id where id_modele = $modele->id 
+                 order by id_ecran ");
                echo "<tbody>";
                  foreach ($lesQuantites as $quantite) {
                     
@@ -57,6 +60,3 @@
         }
 
     }
-
-    
-    ?>

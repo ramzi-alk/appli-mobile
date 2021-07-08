@@ -59,7 +59,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) ){?>
    
         <th scope="col">Id</th>
         <th scope="col">Accessoires</th>
-        <th scope="col">Prix</th>
+        <th scope="col">Personnel</th>
         <th scope="col">Modif</th>
         <th scope="col">Sup</th>
         </tr>
@@ -70,7 +70,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) ){?>
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/include/connexion_bd.php";
         try {
            
-            $lesEnregs = $bdd->query("select ventes.id as 'id', id_accessoires,nom from ventes join accessoires on id_accessoires = accessoires.id order by id desc");
+            $lesEnregs = $bdd->query("select ventes.id as 'id', id_accessoires, id_client, client.nom as 'nomPersonnel', accessoires.nom from ventes join accessoires on id_accessoires = accessoires.id join client on id_client = client.id order by id desc");
             
         } catch (PDOException $e) {
             die("Err BDselect : erreur de lecture table ventes dans ventes.php<br>Message d'erreur :" . $e->getMessage());
@@ -82,7 +82,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) ){?>
                 echo "<tbody id='myTable'> <tr>
                 <td>$enreg->id</td>
                 <td>$enreg->nom</td>
-                
+                <td>$enreg->nomPersonnel</td>
                 <td><a href='/page/modification/modif_ventes.php?id=$enreg->id'><img src='/image/edit.svg' alt='' style='height: 30px;'> </a> </td>
                 <td><a href='/page/suppression/sup_ventes.php?id=$enreg->id'><img src='/image/delete.svg' alt='' style='height: 30px; fill:red;  background-image: url(/image/delete.svg);'> </a> </td>
             </tr>

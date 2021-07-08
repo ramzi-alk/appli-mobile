@@ -49,7 +49,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) ){?>
     </div>
     <br><br><div class="lien">
 
-<a href="/page/ajout/ajout_client.php" class="ajt">Ajouter un client</a>
+<a href="/page/ajout/ajout_client.php" class="ajt">Ajouter une personne</a>
 </div>
 <br><br>
 <div class="lien">
@@ -99,15 +99,17 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) ){?>
             <td>$enreg->nomModele</td>
             <td>$enreg->imei</td>
             <td>$enreg->libelle</td>
-            ";if($enreg->id_ecran > 0){
+            ";
+            // Nous vérifions si id_ecran est supérieur à 0 si oui alors la valeur affiché est écran
+            // sinon nous vérifions si id_vitrearriere est supérieur à 0 si oui alors la valeur affiché est vitre arrière
+            // ou sinon nous affichons Batterie
+            if($enreg->id_ecran > 0){
                 echo"<td>Écran</td>";
             }elseif($enreg->id_vitrearriere > 0 ){
                 echo"<td>Vitre arrière</td>";
             }else{
                 echo"<td>Batterie</td>";
             }
-            
-            
             echo"
             <td>$enreg->prix</td>
             <td>$enreg->observation</td>
